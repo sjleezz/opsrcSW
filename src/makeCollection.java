@@ -65,7 +65,7 @@ public class makeCollection {
 		
 	}
 	
-	public void extractContents_(int i, String wantTag1, String wantTag2) throws TransformerException, IOException {
+	public void extractContent(int i, String wantTag1, String wantTag2) throws TransformerException, IOException {
 		this.jdoc = Jsoup.parse(files[0], "UTF-8");		// jsoup document °´Ã¼ »ý¼º
 		extractTitle(i, wantTag1);
 		extractBody(i, wantTag2);

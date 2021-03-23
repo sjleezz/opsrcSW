@@ -8,6 +8,7 @@ public class kuir {
 	public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException {
 		// TODO Auto-generated method stub
 		String src_path = args[1];	// 소스가 될 파일 위치 위치
+		String dest_path = "C:\\Users\\ASUS\\eclipse-workspace\\SimpleIR\\save_xml";	// 저장할 위치
 		
 		if(args.length > 2) {
 			return;
@@ -17,15 +18,16 @@ public class kuir {
 			System.out.println("arg[0] is -c");
 			System.out.println("arg[0] is -c");
 			System.out.println("arg[1] is " + src_path);
-			/**** 1주차 : HTML 파일 불러서 xml로 저장 ****/
-			String dest_path = "C:\\Users\\ASUS\\eclipse-workspace\\SimpleIR\\save_xml";	// 저장할 위치
 			
+			/**** 2주차 : HTML 파일 불러서 xml로 저장 ****/
 			makeCollection sir = new makeCollection();
 			sir.savePath = dest_path;
 			
+			// open files
 			sir.loadFiles(src_path);
 			System.out.println("html -> xml loadfile was done");
 			
+			// build XML Document
 			sir.buildXMLDocument();
 			System.out.println("buildXMLDocument was done");
 			
@@ -41,31 +43,52 @@ public class kuir {
 		else if(args[0].equals("-k")){
 			System.out.println("arg[0] is -k");
 			System.out.println("arg[1] is " + args[1]);
-			/***** 2주차 : 키워드 추출  *****/
-			String dest_path = "C:\\Users\\ASUS\\eclipse-workspace\\SimpleIR\\save_xml";	// 저장할 위치
 			
+			/***** 3주차 : 키워드 추출  *****/
 			makeKeyword sir = new makeKeyword();
 			sir.savePath = dest_path;
 			
 			sir.setTitle(null);
 			sir.setBody(null);
 			
+			// open files
 			sir.loadFiles(src_path);
-			System.out.println("xml -> xml loadfile was done");
+			System.out.println("xml loadfile was done");
 			
+			// build XML Document
 			sir.buildXMLDocument();
 			System.out.println("buildXMLDocument was done");
 			
-			if(sir.files.length == 1) {
-				for (int i = 0; i < 5 ; i++) {
-					sir.extractContents_(i, "title", null);
-					sir.extractKeyword();
-					sir.generateElement(i);
-				}
-				System.out.println("extractKeyword was done");
+			for (int i = 0; i < 5 ; i++) {
+				sir.extractContent(i, "title", null);
+				sir.extractKeyword();
+				sir.generateElement(i);
 			}
+			System.out.println("extractKeyword was done");
 			
 			sir.makeXML("\\week2\\index.xml");
+		}
+		
+		else if(args[0].equals("-w")) {	// makeWeight 실행
+			System.out.println("arg[0] is -w");
+			System.out.println("arg[1] is " + args[1]);
+			
+			/***** 4주차 : 가중치 계산  *****/
+			makeWeight sir = new makeWeight();
+			sir.savePath = dest_path;
+			
+			sir.setTitle(null);
+			sir.setBody(null);
+			
+			// open files
+			sir.loadFiles(src_path);
+			System.out.println("xml loadfile was done");
+			
+			// build XML Document
+			sir.buildXMLDocument();
+			System.out.println("buildXMLDocument was done");
+			
+			
 		}
 		
 		else {
