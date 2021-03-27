@@ -6,7 +6,7 @@ public class makeKeyword extends makeCollection{
 	
 	KeywordExtractor ke;
 	
-	public void extractKeyword() {
+	public void extractKeyword(int i) {
 		
 		StringBuilder buf = new StringBuilder();
 		// init KeywordExtractor
@@ -19,5 +19,6 @@ public class makeKeyword extends makeCollection{
 		}
 		this.buf_body = buf.toString();
 	}
+	
 	
 }
