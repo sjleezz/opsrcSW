@@ -99,12 +99,10 @@ public class kuir {
 			}
 			
 			// '단어:빈도수#'으로 구성된 body의 내용들을 읽어들여서 1. 각 doc에서의 빈도수를  저장   2. 추출한 변수들을 토대로 가중치 W 계산   3. [키워드, [id, 가중치]]의 hashmap 구조를 구축 
-			
 			sir.extractW();
 			System.out.println("extractDF() finished!");
 			
-		
-
+			//테스트 출력용 코드
 			for(String key : sir.map_keywordAndIdAndWeight.keySet()) {
 				System.out.print(key + " -> ");
 				for(String k : sir.map_keywordAndIdAndWeight.get(key).keySet()) {
@@ -113,12 +111,10 @@ public class kuir {
 				System.out.println("");
 			}
 			
+			// .post파일로 hashmap객체 저장
 			sir.createHashMapFile("\\week4\\index.post");
 			System.out.println("createHashMapFile() finished!");
 			
-			System.out.println("calculating weight was done");
-			
-			//sir.makeXML("\\week3\\index.post");
 		}
 		
 		else {

@@ -102,7 +102,6 @@ public class makeCollection {
 		}
 		else {															// 제거 원하는 태그 없으면 body에서 그냥 모두 가져옴
 			Elements bods = this.jdoc.select("body");					// id가 i인 태그 중 body의 내용
-			System.out.println(bods.get(i).text());
 			this.buf_body = bods.get(i).text();
 			
 			return;
