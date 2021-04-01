@@ -5,14 +5,10 @@ import javax.xml.transform.TransformerException;
 
 public class kuir {
 
-	public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException {
+	public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		String src_path = args[1];	// 소스가 될 파일 위치 위치
 		String dest_path = "C:\\Users\\ASUS\\eclipse-workspace\\SimpleIR\\save_xml";	// 저장할 위치
-		
-		if(args.length > 2) {
-			return;
-		}
 		
 		if(args[0].equals("-c")) {								// html -> xml 추출
 			System.out.println("arg[0] is -c");
@@ -82,7 +78,7 @@ public class kuir {
 			sir.setBody(null);
 			
 			// open files
-			sir.loadFiles(src_path);							//C:\Users\ASUS\eclipse-workspace\SimpleIR\save_xml\week2 에서 index.xml 읽을 예정
+			sir.loadFiles(src_path);							
 			System.out.println("xml loadfile was done");
 			
 			// build XML Document
@@ -114,6 +110,54 @@ public class kuir {
 			// .post파일로 hashmap객체 저장
 			sir.createHashMapFile("\\week4\\index.post");
 			System.out.println("createHashMapFile() finished!");
+			
+		}
+		
+		else if(args[0].equals("-s")) {
+			System.out.println("arg[0] is -i");
+			System.out.println("arg[1] is " + args[1]);
+			
+			int docCnt = 5;
+			
+			// 4주차 : 가중치 계산 
+			searcher sir = new searcher(docCnt);
+			sir.savePath = dest_path;
+			
+			sir.setTitle(null);
+			sir.setBody(null);
+			
+			// title 저장용
+			// open files
+			sir.loadFiles("C:\\Users\\ASUS\\eclipse-workspace\\SimpleIR\\save_xml\\week3");							
+			System.out.println("loadfile was done");
+			
+			// save title, body
+			for (int fileCnt = 0; fileCnt < sir.N; fileCnt++) {
+				sir.extractContent(fileCnt, "title", null);				//각 doc에서의 title, body 추출
+				sir.bufs_title[fileCnt] = sir.buf_title;					// bufs에 5개의 body 저장
+				System.out.println("title : " + sir.bufs_title[fileCnt]);
+			}
+			System.out.println("extractContent was done");
+			
+			// input query
+			if(args[2].equals("-q")) {
+				sir.inputQuery(args[3]);
+			}
+			System.out.println("input query success");
+			System.out.println("query : "+ sir.query);
+			
+			//keyword classification and saving in HashMap object
+			sir.extractKeyword();
+			System.out.println("extractKeyword success");
+			
+			//불러온 index.post파일에서 map_keywordAndIdAndWeight에 key, value 추출
+			sir.restoreHashMap(src_path, "\\index.post");
+			System.out.println("restoreHashMap success");
+			
+			//calculate similarity
+			// check HashMap has such keyword
+			sir.CalcSim();
+			System.out.println("CalcSim success");
 			
 		}
 		

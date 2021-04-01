@@ -1,5 +1,7 @@
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,12 +11,17 @@ import javax.xml.transform.TransformerException;
 
 public class indexer extends makeKeyword {
 	int N;
+	String[] bufs_title;
 	String[] bufs_body;
 	ArrayList[] keywords;
 	
 	HashMap<String, HashMap<String, Double>> map_keywordAndIdAndTF;			// [Keyword, [Id, TF]]
 	HashMap<String, HashMap<String, Double>> map_keywordAndIdAndWeight;		// result : [Keyword and [Id , Weight]]
 	
+	
+	public indexer() {
+		
+	}
 	
 	public indexer(int fileCnt) {		// 필요한 자료구조들 선언 및 초기화
 		this.N = fileCnt;
@@ -103,6 +110,28 @@ public class indexer extends makeKeyword {
 		
 		objectOutputStream.writeObject(this.map_keywordAndIdAndWeight);
 		objectOutputStream.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void restoreHashMap(String path, String filename) throws IOException, ClassNotFoundException {
+		FileInputStream fileStream = new FileInputStream(path+filename);
+		ObjectInputStream objectInputStream = new ObjectInputStream(fileStream);
+		
+		Object object = objectInputStream.readObject();
+		objectInputStream.close();
+		
+		// HashMap 파일에 저장
+		this.map_keywordAndIdAndWeight = (HashMap<String, HashMap<String, Double>>)object; 
+		
+		/*Iterator<String> it_1 = this.map_keywordAndIdAndWeight.keySet().iterator();
+		while(it_1.hasNext()) {
+			String key = it_1.next();
+			Iterator<String> it_2 = this.map_keywordAndIdAndWeight.get(key).keySet().iterator();
+			while(it_2.hasNext()) {
+				String id = it_2.next();
+				double value = this.map_keywordAndIdAndWeight.get(key).get(id);
+			}
+		}*/
 	}
 	
 }

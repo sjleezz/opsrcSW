@@ -16,6 +16,7 @@ public class makeKeyword extends makeCollection{
 		//use extracted list
 		for(Keyword k : kl) {
 			buf.append(k.getString() + ":" + k.getCnt() + "#");
+			
 		}
 		this.buf_body = buf.toString();
 	}

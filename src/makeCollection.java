@@ -68,7 +68,7 @@ public class makeCollection {
 		
 	}
 	
-	// xml file 하나에서 작업하는 경우
+	/*** xml file 하나에서 작업하는 경우 ***/
 	public void extractContent(int i, String wantTag1, String wantTag2) throws TransformerException, IOException {
 		FileInputStream fis = new FileInputStream(files[0]);
 		this.jdoc = Jsoup.parse(fis, "UTF-8", "", Parser.xmlParser());		// jsoup document 객체 생성
@@ -76,6 +76,7 @@ public class makeCollection {
 		extractBody(i, wantTag2);
 	
 	}
+	/*** title 추출 메소드 ***/
 	public void extractTitle(int i, String wantTag)  {
 		
 		if(files.length > 1) {										// input 파일 개수가 여러개
@@ -86,9 +87,9 @@ public class makeCollection {
 			Elements titles = this.jdoc.getElementsByTag(wantTag);			// title의 내용을 빼오기 위함
 			this.buf_title = titles.get(i).text();				// i번째 title 태그를 가져옴
 		}
-		
 	}
 	
+	/*** body 추출 메소드 ***/
 	public void extractBody(int i, String wantTag)  {
 		StringBuilder buf_bod = new StringBuilder();
 		if(wantTag != null) {											// 제거 원하는 태그가 있으면 그 태그 제거하고 모두 가져옴
@@ -107,9 +108,8 @@ public class makeCollection {
 			return;
 		}
 	}
-	
+	/*** element 생성 ***/
 	public void generateElement(int i) {
-		/*** element 생성 ***/
 		
 		// doc element 생성
 		Element doc = this.docum.createElement("doc");
@@ -130,8 +130,9 @@ public class makeCollection {
 		doc.appendChild(body);
 	}
 	
+	/*** xml 파일로 쓰기 ***/
 	public void makeXML(String filename) throws FileNotFoundException, TransformerException {
-		// xml 파일로 쓰기 
+		
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
