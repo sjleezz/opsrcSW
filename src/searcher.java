@@ -44,7 +44,7 @@ public class searcher extends indexer{
 	}
 	
 	// 유사도 계산 메소드
-	public void CalcSim() {
+	public void innerProduct() {
 		Map<String, Double> hm = new HashMap<String, Double>();
 		
 		double[] dots = new double[5];

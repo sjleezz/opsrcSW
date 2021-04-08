@@ -156,7 +156,7 @@ public class kuir {
 			
 			//calculate similarity
 			// check HashMap has such keyword
-			sir.CalcSim();
+			sir.innerProduct();
 			System.out.println("CalcSim success");
 			
 		}
