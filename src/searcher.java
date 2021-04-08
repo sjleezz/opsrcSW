@@ -44,7 +44,7 @@ public class searcher extends indexer{
 	}
 	
 	// 유사도 계산 메소드
-	public void CalcSim2() {
+	public void CalcSim2() { 
 		Map<String, Double> hm = new HashMap<String, Double>();
 		double[] cosine_result = new double[this.N];
 		double[] dots = new double[this.N];	// 해당 문서의 내적
@@ -55,11 +55,9 @@ public class searcher extends indexer{
 			double w_b = 0.0;	// 분모의 뒤 루트 내부의 값을 계산하기 위한 변수
 			for(String key : this.map_kw.keySet()) {
 				if(this.map_keywordAndIdAndWeight.containsKey(key)) {
-					System.out.println(key);
 					
 					// 역파일 쪽의 가중치가 null인 경우 처리용
 					String w = String.valueOf(this.map_keywordAndIdAndWeight.get(key).get(String.valueOf(i+1)));
-					System.out.println("value : " + w);
 					if(w == "null") {
 						w_b += 0.0;	// 역파일 내에 해당 키워드가 없어서 가중치가 null인 경우 0.0으로 취급
 						System.out.println(key + "의 " + (i+1) + "번째의 가중치가 역파일 내에 없습니다.");
@@ -69,10 +67,7 @@ public class searcher extends indexer{
 						// 내적 (분자)
 						double x = Math.round((double)this.map_kw.get(key)*100)/100.0;
 						double y = this.map_keywordAndIdAndWeight.get(key).get(String.valueOf(i+1));
-						System.out.println(x);
-						System.out.println(y);
 						dots[i] += x * y;			// 현재 문서의 내적
-						System.out.println(dots[i]);
 						
 						// 분모용 변수들. 제곱해서 더해가며 저장
 						w_a += Math.pow(x, 2);
@@ -80,18 +75,16 @@ public class searcher extends indexer{
 					}
 				}
 			}
-			System.out.println("dot[" + i + "] : " + dots[i]);
 			
 			// 최종적인 분모값
 			double denom = Math.sqrt(w_a) * Math.sqrt(w_b);
 			
 			// 코사인 유사도 결과
 			if(denom == 0.0) {
-				System.out.println("denom이 0입니다.");
+				cosine_result[i] = 0.0;
 			}
 			else {
 				cosine_result[i] = dots[i] / denom;
-				System.out.println("cosine_result : " + cosine_result[i]);
 			}
 			
 			
@@ -115,7 +108,6 @@ public class searcher extends indexer{
 			}
 		});
 
-		
 		int cnt = 0;
 		for(Entry<String, Double> entry : list_entries) {
 			double val = Math.round(entry.getValue()*100)/100.0;
