@@ -33,7 +33,7 @@ public class makeCollection {
 	String buf_title;
 	String buf_body;
 	
-	String savePath;
+	String savePath; 
 	Document jdoc;
 	
 	

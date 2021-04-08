@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import javax.xml.transform.TransformerException;
 
 public class indexer extends makeKeyword {
-	int N;
+	int N; 
 	String[] bufs_title;
 	String[] bufs_body;
 	ArrayList[] keywords;

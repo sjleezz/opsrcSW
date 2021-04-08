@@ -19,7 +19,7 @@ public class makeKeyword extends makeCollection{
 			
 		}
 		this.buf_body = buf.toString();
-	}
+	} 
 	
 	
 }
