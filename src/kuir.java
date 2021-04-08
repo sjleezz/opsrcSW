@@ -156,7 +156,8 @@ public class kuir {
 			
 			//calculate similarity
 			// check HashMap has such keyword
-			sir.CalcSim;
+			sir.CalcSim();
+			sir.innerProduct();
 			
 		}
 		
