@@ -44,7 +44,7 @@ public class searcher extends indexer{
 	}
 	
 	// 유사도 계산 메소드
-	public void CalcSim() {
+	public void CalcSim2() {
 		Map<String, Double> hm = new HashMap<String, Double>();
 		double[] cosine_result = new double[this.N];
 		double[] dots = new double[this.N];	// 해당 문서의 내적
@@ -88,7 +88,6 @@ public class searcher extends indexer{
 			// 코사인 유사도 결과
 			if(denom == 0.0) {
 				System.out.println("denom이 0입니다.");
-				cosine_result[i] = 0.0;
 			}
 			else {
 				cosine_result[i] = dots[i] / denom;
