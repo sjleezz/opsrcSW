@@ -12,12 +12,16 @@ public class genSnippet extends searcher{
 	public void func1() {
 		// tokenize
 		int cnt = 0;
+		int flag = new int(5);
 		StringTokenizer st = new StringTokenizer(this.files.toString(), "\n");
 		while ( st.hasMoreTokens() ) {
 			String actualElement = st.nextToken();
-			if(actualElement.contains(bufs[cnt++])) {
-				// compare string
+			for(int i = 0 ; i < 5 ; i++) {
+				if(actualElement.contains(bufs[cnt++])) {
+					//
+				}
 			}
+			
 		}
 	}
 	
