@@ -16,7 +16,7 @@ public class genSnippet extends searcher{
 		while ( st.hasMoreTokens() ) {
 			String actualElement = st.nextToken();
 			if(actualElement.contains(bufs[cnt++])) {
-				
+				// compare string
 			}
 		}
 	}
